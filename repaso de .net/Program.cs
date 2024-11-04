@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Odbc;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,9 @@ namespace repaso_de.net
             Console.WriteLine("11. Ejecucion de intrucciones anidadas son 2 for - Tabla de multiplicar");
             Console.WriteLine("12. tipos de llamadas de metodos");
             Console.WriteLine("13. Pasar por referencia (ref)");
+            Console.WriteLine("14. Array - Matriz unidimencional");
+            Console.WriteLine("15. Matriz mutidimencional de 2");
+            Console.WriteLine("16. Pasar matrices como argumentos en metodos");
 
             Console.WriteLine();
 
@@ -43,9 +47,37 @@ namespace repaso_de.net
                     var nombrePersona = "Hildebrando";
                     var direccion = "Calle 20 #44";
                     var calif = 4.5;
+
                     Console.WriteLine("Hola mundo");
                     Console.WriteLine("Hola mundo " + nombreEstudiante);
 
+                    //Tupla ejemplo:
+                    Console.WriteLine();
+                    Console.WriteLine("Ejemplo tupla 1:");
+                    (string, byte, long, int) persona1 = ("hildel", 50, 3234343, 24);
+                    Console.WriteLine(persona1);
+
+                    // con var tambien es posible:
+                    Console.WriteLine();
+                    Console.WriteLine("Ejemplo tupla 2:");
+                    var persona2 = ("hildel", 50, 3234343, 24);
+                    Console.WriteLine(persona2);
+                    Console.WriteLine("item1: " + persona2.Item1 + ", item2: " + persona2.Item2);
+
+                    // otra manera para mencionar el nombre de las variables en las tuplas:
+                    Console.WriteLine();
+                    Console.WriteLine("Ejemplo tupla 3:");
+                    var persona3 = (nombre: "hildel", edad: 24, telefono: 3234343, año: 2000);
+                    Console.WriteLine(persona3);
+                    Console.WriteLine("item1: " + persona3.nombre + ", item2: " + persona3.edad);
+
+                    // mejor manera de mostrar las tuplas:
+                    Console.WriteLine();
+                    Console.WriteLine("Ejemplo tupla 4:");
+                    (string nombre, byte edad, long telefono, int año) persona4 = ("hildel", 24, 32534343, 2000);
+                    Console.WriteLine("{0}, {1}, {2}, {3}", persona4.nombre, persona4.edad, persona4.telefono, persona4.año);
+
+                    Console.WriteLine();
                     char salon = 'A';
                     int numeroEstudiantes = 20;
                     string nombreAlumno = "Hildebrando Correa";
@@ -54,7 +86,7 @@ namespace repaso_de.net
                     promedioFinal = (nota1 + nota2 + nota3) / 3;
 
                     Console.WriteLine("Numero de estudiantes: " + numeroEstudiantes + " en el salon: " + salon);
-                    Console.WriteLine("El nombre del Estudiante: " + nombreAlumno + ", con Cedula: " + cedula + ", "+ nombrePersona + ", " + direccion + ", "+ calif);
+                    Console.WriteLine("El nombre del Estudiante: " + nombreAlumno + ", con Cedula: " + cedula + ", " + nombrePersona + ", " + direccion + ", " + calif);
                     Console.WriteLine("Promedio Final: " + promedioFinal);
 
 
@@ -285,7 +317,7 @@ namespace repaso_de.net
                     if ((edadd >= 18) && (licecia == true))
                     {
                         Console.WriteLine("cumple con los requisitos, puede conducir");
-                    }else
+                    } else
                     {
                         Console.WriteLine("No cumple con los requisitos, NO debe conducir");
                     }
@@ -300,7 +332,7 @@ namespace repaso_de.net
                     Console.WriteLine("¿Cuanto fue tu calificacion de preparacion? entre 0 a 10:");
                     califiacionExamen = Convert.ToSingle(Console.ReadLine());
 
-                    if ((calificacionPreparacion >= 9) || (califiacionExamen >=9.5))
+                    if ((calificacionPreparacion >= 9) || (califiacionExamen >= 9.5))
                     {
                         Console.WriteLine("Gano el curso");
                     }
@@ -323,7 +355,7 @@ namespace repaso_de.net
                     Console.WriteLine("cliclos y bucles");
                     Console.WriteLine("ciclo for - ejemplo 1");
 
-                    for (int i=1; i <= 10; i++)
+                    for (int i = 1; i <= 10; i++)
                     {
                         Console.WriteLine(i);
                     }
@@ -337,7 +369,7 @@ namespace repaso_de.net
                     // Cambio en el iterador, con asignacion compuestas
                     Console.WriteLine();
                     Console.WriteLine("Cambio en el iterador, con asignacion compuestas");
-                    for(int i = 1; i <=10; i += 2)
+                    for (int i = 1; i <= 10; i += 2)
                     {
                         Console.WriteLine(i);
 
@@ -345,7 +377,7 @@ namespace repaso_de.net
 
                     Console.WriteLine();
                     Console.WriteLine("En decremento: ");
-                    for(int i=10; i >=1; i--)
+                    for (int i = 10; i >= 1; i--)
                     {
                         Console.WriteLine(i);
                     }
@@ -371,9 +403,9 @@ namespace repaso_de.net
                     Console.WriteLine();
                     Console.WriteLine("Ejemplo 2 de contador: incremento de 2 en 2 el iterador");
                     int contadorr = 0;
-                    for (int i = 0; i <= 20; i+=2)
+                    for (int i = 0; i <= 20; i += 2)
                     {
-                        contadorr +=1;
+                        contadorr += 1;
                         Console.WriteLine("{0}, Vueltas del ciclo numerico {1}", i, contadorr);
                     }
                     Console.WriteLine("Vueltas del ciclo numerico fue: {0}", contadorr);
@@ -385,7 +417,7 @@ namespace repaso_de.net
                     Console.WriteLine("Ejemplo 4 de acumulador de compras de productos");
                     int acumulador = 0;
                     int precio = 0;
-                    int cantidadProductos =0;
+                    int cantidadProductos = 0;
 
                     Console.Write("Ingrese la cantidad de productos: ");
                     cantidadProductos = Convert.ToInt32(Console.ReadLine());
@@ -405,7 +437,7 @@ namespace repaso_de.net
                     Console.WriteLine();
                     Console.WriteLine("Ejemplo 5 de Factorial de un numero");
                     ulong numeroUsuario, factorial = 1;
-                   
+
                     Console.Write("Ingrese el numero para calcular el factorial: ");
                     numeroUsuario = Convert.ToUInt64(Console.ReadLine());
 
@@ -414,7 +446,7 @@ namespace repaso_de.net
                         factorial = factorial * i; // factorial *= i;
                     }
                     Console.WriteLine("El factorial es {0}, es: {1}", numeroUsuario, factorial);
-                break;
+                    break;
 
 
 
@@ -424,7 +456,7 @@ namespace repaso_de.net
                     Console.WriteLine("Ciclos o bucles while");
 
                     byte numeroW = 1;
-                    while (numeroW <=10)
+                    while (numeroW <= 10)
                     {
                         Console.WriteLine(numeroW);
 
@@ -457,11 +489,11 @@ namespace repaso_de.net
                         Console.WriteLine(j);
                         j++;
                     }
-                    while(j <=10); // mientras
+                    while (j <= 10); // mientras
 
 
                     Console.WriteLine();
-                break;
+                    break;
 
 
 
@@ -481,7 +513,7 @@ namespace repaso_de.net
                             Console.WriteLine("{0} * {1} = {2}", i, k, resultadoMultipliacion);
                         }
                     }
-                break;
+                    break;
 
 
 
@@ -530,7 +562,7 @@ namespace repaso_de.net
 
                     Console.WriteLine("El resultado de la division {0} / {1} = {2}", num1Argumento, num2Argumento, resultadoDividir);
 
-                break;
+                    break;
 
 
 
@@ -547,7 +579,7 @@ namespace repaso_de.net
 
                     // despues de que el metodo cambios el valor, volvemos a mostrar
                     Console.WriteLine(numArgumento);
-                break;
+                    break;
 
 
 
@@ -555,10 +587,192 @@ namespace repaso_de.net
                 case 14:
                     Console.WriteLine();
                     Console.WriteLine("#################");
+                    Console.WriteLine("Array - Matriz unidimencional");
+                    // tipo[] nombre = new tipo[tamaño]
+                    string[] nombresss = new string[2] { "Sandra", "juan" };
+
+                    double[] calificaciones1 = new double[4] { 14, 23, 3.2, 43 };
+                    // otra forma:
+                    double[] calificaciones2 = new double[] { 14, 23, 3.2, 43 };
+                    Console.WriteLine("calificaciones: " + calificaciones1[1]);
+                    // otra forma:
+                    double[] calificaciones3 = { 14, 23, 3.2, 43 };
+
+                    //decalaracion de matriz
+                    int[] numeros;
+
+                    // Instancia (creacion del objeto) e inicializacion
+                    numeros = new int[] { 4, 5, 6, 7 };
+
+                    double[] notas = new double[4];
+
+                    notas[2] = 7.4;
+
+                    Console.WriteLine("Nota 2: " + notas[2]);
+
+
+                    double calificacionesFinal;
+                    calificacionesFinal = notas[2] - 1;
+                    Console.WriteLine("calificacionesFinal: " + calificacionesFinal);
+
+                    Console.WriteLine();
+                    Console.WriteLine("Ejemplo 1 de array");
+                    string[] nombres = new string[3];
+
+                    //valores del array
+                    nombres[0] = "sandra";
+                    nombres[1] = "santi";
+                    nombres[2] = "hilde";
+
+
+                    for (byte i = 0; i <= 2; i++)
+                    {
+                        Console.WriteLine("Nombre: " + nombres[i]);
+                    }
+                    // Para saber la longitud del array
+                    Console.WriteLine("La logitud de la array de nombres[3] es de: " + nombres.Length);
+
+
+                    Console.WriteLine();
+                    Console.WriteLine("Ejemplo 2 de array");
+                    string[] nombreA = new string[3];
+
+                    for (byte i = 0; i <= 2; i++)
+                    {
+                        Console.Write("Ingrese el nombre {0}: ", i);
+                        nombreA[i] = Console.ReadLine();
+                    }
+
+                    //mostrar los valores del array
+                    Console.WriteLine("Los nombres ingresado son: ");
+                    for (byte i = 0; i <= 2; i++)
+                    {
+                        Console.WriteLine("Nombre: " + nombreA[i]);
+                    }
+
+
+                    Console.WriteLine();
+                    Console.WriteLine("Ejemplo 3 de array");
+                    int cantidadNotas;
+                    double sumaNotas = 0, promedioNotas = 0;
+                    Console.Write("Ingrese la cantidad de notas del estudiante: ");
+                    cantidadNotas = Convert.ToInt32(Console.ReadLine());
+
+                    double[] notass = new double[cantidadNotas];
+
+                    for (byte i = 0; i < cantidadNotas; i++)
+                    {
+                        Console.Write("Ingrese el valor de la nota {0}: ", i);
+                        notass[i] = Convert.ToDouble(Console.ReadLine());
+                        // Acumulado de notas
+                        sumaNotas += notass[i];
+                    }
+                    Console.WriteLine("la suma es: " + sumaNotas + ", dividor entre " + cantidadNotas);
+                    promedioNotas = sumaNotas / cantidadNotas;
+                    Console.WriteLine("El promedio del estudiante fue de: {0}", promedioNotas);
+                    break;
+
+
+
+
+                case 15:
+                    Console.WriteLine();
+                    Console.WriteLine("#################");
+                    Console.WriteLine("Matriz mutidimencional de 2");
+
+                    //tipo[,] nombre = new tipo [filas, columnas]
+                    // declaracion e intacio de una matriz de 2 dimenciones
+                    double[,] ventas = new double[4, 3] { { 100, 33, 32 }, { 22, 33, 44 }, { 44, 33, 43 }, { 33, 55, 66 } };
+                    var finzanzas = new double[4, 3] { { 100, 33, 32 }, { 22, 33, 44 }, { 44, 33, 43 }, { 33, 55, 66 } };
+
+
+                    // declaracion e intacio de una matriz de 3 dimenciones
+                    double[,,] ventasAño = new double[2, 2, 2];
+
+                    double[,] compras = new double[4, 3] { { 10, 33, 32 },
+                                                           { 22, 33, 44 },
+                                                           { 44, 33, 43 },
+                                                           { 33, 55, 66 } };
+                    Console.WriteLine("matriz [4,3] en la posicion de compras[0,0]: " + compras[0, 0]);
+                    Console.WriteLine("matriz [4,3] en la posicion de compras[1,1]: " + compras[1, 1]);
+                    Console.WriteLine("matriz [4,3] en la posicion de compras[3,2]: " + compras[3, 2]);
+                    int g, h;
+                    for (g = 0; g < 4; g++)
+                    {
+                        Console.WriteLine("Fila {0}", g);
+
+                        for (h = 0; h < 3; h++)
+                        {
+                            Console.WriteLine(compras[g, h]);
+                        }
+                    }
+
+                    Console.WriteLine();
+                    // Para saber la longitud de una matriz
+                    Console.WriteLine("La logitud de la matriz de compras[4,3] es de: " + compras.Length);
+
+                    //mostramos el tamaño de la primera dimencion de la matriz
+                    Console.WriteLine("Tamaño de la primera dimencion de la matriz compras: " + compras.GetLength(0));
+                    Console.WriteLine("Tamaño de la segunda dimencion de la matriz compras: " + compras.GetLength(1));
+
+                    for (g = 0; g < compras.GetLength(0); g++)
+                    {
+                        Console.WriteLine("Fila {0}", g);
+
+                        for (h = 0; h < compras.GetLength(1); h++)
+                        {
+                            Console.WriteLine(compras[g, h]);
+                        }
+                    }
+
+                    break;
+
+
+
+
+                case 16:
+                    Console.WriteLine();
+                    Console.WriteLine("#################");
+                    Console.WriteLine("Pasar matrices como argumentos en metodos");
+
+                    int[] matriz = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+                    ImprimirMatriz(matriz);
+
+                    double[,] matriz2d = new double[4, 3] { { 100, 33, 32 }, { 22, 33, 44 }, { 44, 33, 43 }, { 33, 55, 66 } };
+
+                    ImprimirMatrizMulti(matriz2d);
+
+                    Console.WriteLine();
+                break;
+
+
+
+                case 17:
+                    Console.WriteLine();
+                    Console.WriteLine("#################");
                     Console.WriteLine("");
                     Console.WriteLine();
                     break;
 
+
+
+                case 18:
+                    Console.WriteLine();
+                    Console.WriteLine("#################");
+                    Console.WriteLine("");
+                    Console.WriteLine();
+                    break;
+
+
+
+
+                case 19:
+                    Console.WriteLine();
+                    Console.WriteLine("#################");
+                    Console.WriteLine("");
+                    Console.WriteLine();
+                    break;
 
 
                 default:
@@ -658,6 +872,31 @@ namespace repaso_de.net
         static void Prueba(ref byte numeroParametro)
         {
             numeroParametro = 20;
+        }
+
+
+        static void ImprimirMatriz(int[] matrizParametros)
+        {
+            int i;
+            for(i = 0; i < matrizParametros.Length; i++)
+            {
+                Console.WriteLine(matrizParametros[i]);
+            }
+        }
+
+
+        static void ImprimirMatrizMulti(double[,] matriz2dParametros)
+        {
+            int i, j;
+            for (i = 0; i < matriz2dParametros.GetLength(0); i++)
+            {
+                Console.WriteLine("Fila {0}", i);
+
+                for (j = 0; j < matriz2dParametros.GetLength(1); j++)
+                {
+                    Console.WriteLine(matriz2dParametros[i, j]);
+                }
+            }
         }
     }
 }
