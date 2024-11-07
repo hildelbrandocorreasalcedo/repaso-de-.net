@@ -34,6 +34,8 @@ namespace repaso_de.net
             Console.WriteLine("18. Clases y objetos, propiedades Privadas - ejemplo de la clase Automovil");
             Console.WriteLine("19. Metodo sobrecargado - Ejemplo");
             Console.WriteLine("20. Clase Random - Ejemplo");
+            Console.WriteLine("21. Ejemplo practico con clases, objetos, metodos, Random");
+            Console.WriteLine("22. Ejemplo de cuenta bancaria - con clases, objetos, metodos");
 
             Console.WriteLine();
 
@@ -847,11 +849,30 @@ namespace repaso_de.net
                 case 21:
                     Console.WriteLine();
                     Console.WriteLine("#################");
-                    Console.WriteLine("");
+                    Console.WriteLine("Ejemplo practico con clases, objetos, metodos, Random");
 
+                    string nombreArgumento, apellidoArgumento, nip;
+
+                    Console.WriteLine("Bienvenido a Monsters Inc.\n");
+                    Console.WriteLine("Ingrese los siguientes campos que se le soliciten: ");
+
+                    Console.Write("Nombre: ");
+                    nombreArgumento = Console.ReadLine();
+                    Console.Write("Apellido: ");
+                    apellidoArgumento = Console.ReadLine();
+                    Console.Write("Digite su NIP para asignarlo a su tarjeta bancaria: ");
+                    nip = Console.ReadLine();
+
+                    //Intacionaos a la clase empleado
+                    Empleado empleado1 = new Empleado(nombreArgumento, apellidoArgumento);
+
+                    empleado1.Nip = nip;
 
                     Console.WriteLine();
-                    break;
+
+                    //mostrar la informacion de nuestro objeto
+                    Console.WriteLine(empleado1.ToString());
+                break;
 
 
 
@@ -859,9 +880,83 @@ namespace repaso_de.net
                 case 22:
                     Console.WriteLine();
                     Console.WriteLine("#################");
-                    Console.WriteLine("       ");
-                    Console.WriteLine();
-                    break;
+                    Console.WriteLine("Ejemplo de cuenta bancaria - con clases, objetos, metodos");
+
+                    //Variables
+                    double montoArgumento, saldoInicialArgumento;
+                    int opcion;
+                    string nombresArgumento, apellidosArgumento, direccionArgumento, refArgumento;
+
+                    Console.WriteLine("Esta apunto de crear una nueva cuenta, por favor presione cualquier tecla para continuar: ");
+                    Console.ReadKey();
+
+                    Console.WriteLine("\nIngrese la informacio que se le solicita a continuacion: ");
+
+                    Console.Write("\nNombres: ");
+                    nombresArgumento = Console.ReadLine();
+
+                    Console.Write("Apellido: ");
+                    apellidosArgumento = Console.ReadLine();
+
+                    Console.Write("Direcion: ");
+                    direccionArgumento = Console.ReadLine();
+
+                    Console.Write("RFC: ");
+                    refArgumento = Console.ReadLine();
+                    
+                    Console.Write("Ingrese su deposito inicial: $");
+                    saldoInicialArgumento = Convert.ToDouble(Console.ReadLine());
+
+                    //Instanciamos a la clase
+                    CuentaBancaria cliente1 = new CuentaBancaria(nombresArgumento, apellidosArgumento, saldoInicialArgumento, direccionArgumento, refArgumento);
+
+                    Console.WriteLine("Felicidades, su cuenta ha sido creada con exito, presione cualquier tecla para continuar");
+                    Console.ReadLine();
+
+                    //Menu
+                    do
+                    {
+                        Console.WriteLine("\n1. Deposito");
+                        Console.WriteLine("2. Retiro");
+                        Console.WriteLine("3. Consultar Saldo");
+                        Console.WriteLine("4. Mostrar Informacion de la cuenta");
+                        Console.WriteLine("5. Salir");
+
+                        Console.Write("\nElige una opcion: ");
+                        opcion = Convert.ToInt32(Console.ReadLine());
+
+                        switch (opcion)
+                        {
+                            case 1:
+                                Console.Write("Ingrese el monto a depositar: $");
+                                montoArgumento = Convert.ToDouble(Console.ReadLine());
+
+                                cliente1.Deposito(montoArgumento);
+                                break;
+
+                            case 2:
+                                Console.Write("Ingrese el monto a retirar: $");
+                                montoArgumento = Convert.ToDouble(Console.ReadLine());
+
+                                cliente1.Retiro(montoArgumento);
+                                break;
+
+                            case 3:
+                                cliente1.ConsultarSaldo();
+
+                                break;
+
+                            case 4:
+                                Console.WriteLine(cliente1.ToString());
+
+                                break;
+                        }
+
+                    } while (opcion >= 1 && opcion <= 4);
+
+
+                    Console.WriteLine("");
+                break;
 
 
 
@@ -1149,6 +1244,150 @@ namespace repaso_de.net
             nombreApellido = "Nombre: " + nombresParametro + " - Apellido 1: " + apellidoParametro + " - Apellido 2: " + apellido2Parametro;
 
             return nombreApellido;
+        }
+    }
+
+
+
+
+    class Empleado
+    {
+        private string nombre, apellido, id, locker, nip, banco;
+
+        //constructor
+        public Empleado(string nombreParametro, string apellidoParametro)
+        {
+            nombre = nombreParametro;
+            apellido = apellidoParametro;
+
+            //llamando a los metodos para generar los numeros aleatorios
+            id = GenerarID();
+            locker = GenerarLocker();
+            banco = AsignarBanco();
+        }
+
+        //Instanciamos a Random
+        Random random = new Random();
+
+        //propiedades
+        public string Nip
+        {
+            set => nip = value;
+        }
+
+        //Metodos
+        private string GenerarID()
+        {
+            //Variables
+            int i, numero;
+            string id = "";
+
+            for(i=0; i <10; i++)
+            {
+                numero = random.Next(10);
+
+                id += numero.ToString();
+            }
+            return id;
+        }
+
+        private string GenerarLocker()
+        {
+            //Variables
+            int i, numero;
+            string locker = "";
+
+            for (i = 0; i < 2; i++)
+            {
+                numero = random.Next(10);
+
+                locker += numero.ToString();
+            }
+            return locker;
+        }
+
+
+        private string AsignarBanco()
+        {
+            //variables
+            int asignarBanco;
+            string banco = "";
+
+            asignarBanco = random.Next(1, 3);
+
+            switch (asignarBanco)
+            {
+                case 1:
+                    banco = "Santander";
+                    break;
+
+                case 2:
+                    banco = "BBVA";
+                    break;
+            }
+            return banco;
+        }
+
+        public override string ToString()
+        {
+            string mensaje = "";
+
+            mensaje = "Empleado: " + nombre + " " + apellido + "\nNumero de empleado: " + id + "\nLocker No. " + locker + "\nBanco asignado: " + banco; 
+
+            return mensaje;
+        }
+    }
+
+
+
+
+
+    class CuentaBancaria
+    {
+        //campos
+        private string nombre, apellido, direccion, rfc;
+        private double saldo;
+
+        //Constructor
+        public CuentaBancaria(string nombreParametro, string apellidoParametro, double saldoParametro, string direccionParametro ,string rfcParametro) 
+        { 
+            nombre = nombreParametro;
+            apellido = apellidoParametro;
+            saldo = saldoParametro;
+            direccion = direccionParametro;
+            rfc = rfcParametro;
+        }
+
+        public double Deposito(double montoPa)
+        {
+            saldo += montoPa;
+            return saldo;
+        }
+
+        public double Retiro(double montoPa)
+        {
+            if (saldo >= montoPa)
+            {
+                saldo -= montoPa;
+            }
+            else
+            {
+                Console.WriteLine("¡Saldo es insuficiente!");
+            }
+            return saldo;
+        }
+
+        public void ConsultarSaldo()
+        {
+            Console.WriteLine("Su saldo es: ${0}", saldo);
+        }
+
+        public override string ToString()
+        {
+            string mensaje;
+            mensaje = "\nTitular: " + nombre + " " + apellido + "\nRFC: " + rfc + "\nDirección: " + direccion + "\nSaldo: " + saldo;
+
+            return mensaje;
         }
     }
 }
