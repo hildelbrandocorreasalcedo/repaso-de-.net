@@ -36,6 +36,9 @@ namespace repaso_de.net
             Console.WriteLine("20. Clase Random - Ejemplo");
             Console.WriteLine("21. Ejemplo practico con clases, objetos, metodos, Random");
             Console.WriteLine("22. Ejemplo de cuenta bancaria - con clases, objetos, metodos");
+            Console.WriteLine("23. Tipos de referencias Object y tambien convertiones explicitas e implicitas");
+            Console.WriteLine("24. Ejemplo CON Genericos - Ejemplo de Alumnos");
+            Console.WriteLine("25. Ejemplo SIN Genericos - Ejemplo de Alumnos");
 
             Console.WriteLine();
 
@@ -751,7 +754,7 @@ namespace repaso_de.net
                     ImprimirMatrizMulti(matriz2d);
 
                     Console.WriteLine();
-                break;
+                    break;
 
 
 
@@ -824,7 +827,7 @@ namespace repaso_de.net
 
                     nombreYApellido = nombresVariableLocal.Concatenar("Hilde", "Correa", "salcedo");
                     Console.WriteLine(nombreYApellido);
-                break;
+                    break;
 
 
 
@@ -841,7 +844,7 @@ namespace repaso_de.net
                     Console.WriteLine("Te ofrece un numero Random en el rango de 10 a 20 como le pasastes 2 argumento: " + random.Next(10, 20));
 
                     Console.WriteLine();
-                break;
+                    break;
 
 
 
@@ -872,7 +875,7 @@ namespace repaso_de.net
 
                     //mostrar la informacion de nuestro objeto
                     Console.WriteLine(empleado1.ToString());
-                break;
+                    break;
 
 
 
@@ -903,7 +906,7 @@ namespace repaso_de.net
 
                     Console.Write("RFC: ");
                     refArgumento = Console.ReadLine();
-                    
+
                     Console.Write("Ingrese su deposito inicial: $");
                     saldoInicialArgumento = Convert.ToDouble(Console.ReadLine());
 
@@ -956,7 +959,7 @@ namespace repaso_de.net
 
 
                     Console.WriteLine("");
-                break;
+                    break;
 
 
 
@@ -964,7 +967,43 @@ namespace repaso_de.net
                 case 23:
                     Console.WriteLine();
                     Console.WriteLine("#################");
-                    Console.WriteLine("       ");
+                    Console.WriteLine("Tipos de referencias Object y tambien convertiones explicitas e implicitas");
+
+                    //Object
+                    Object numeroEntero = 18;
+                    Object cadena = "Hola";
+                    Object flotante = 3.14;
+
+                    Object[] numerosMatriz = new object[2];
+                    numerosMatriz[0] = 1;
+                    numerosMatriz[1] = "Luis";
+
+                    //conversiones explicitas - son las sencillas como:
+                    byte numeroByte = 10;
+                    int numeroInt = numeroByte;
+                    Console.WriteLine("Conversiones explicita de byte a Int: " + numeroInt);
+
+                    //conversiones implicitas -  con (T)E
+                    int numGrade = 500;
+                    byte numeroPequeño = (byte)numGrade;
+                    Console.WriteLine("Conversiones implicita con (T)E de Int a byte: " + numeroPequeño);
+
+                    //(T)E
+                    //conversion Boxing Unboxing [ tipo de valor -> object] es una conversion implicita
+                    object numero1 = 5;
+                    object numero2 = 20;
+                    object resultadoNumerico;
+
+                    //resultado = numero1 + 10;    //No es posible Object convertir a Int
+
+                    //esta manera si en Boxing:
+                    int a = 50;
+                    object obj = a;
+
+                    //Unboxing [objeto -> tipo de valor] explicita
+                    resultadoNumerico = (int)numero1 + 10;
+                    Console.WriteLine("resultado de conversion de objeto con suma de Int: " + resultadoNumerico);
+
                     Console.WriteLine();
                     break;
 
@@ -974,9 +1013,75 @@ namespace repaso_de.net
                 case 24:
                     Console.WriteLine();
                     Console.WriteLine("#################");
-                    Console.WriteLine("       ");
+                    Console.WriteLine("Ejemplo SIN Genericos - Ejemplo de Alumnos");
+                    Console.WriteLine("se han agragado las calificaciones de manera manual en el sistema: ");
+
+                    //variables locales
+                    Alumno valorElemento;
+
+                    //Instanciando la clase
+                    GuardaObjetosSinGenerico objeto1 = new GuardaObjetosSinGenerico(3); // con 3 elementos
+
+                    //Intanciamos a la clase "Alumno"
+                    Alumno alumno1 = new Alumno(8.5);
+                    Alumno alumno2 = new Alumno(10);
+                    Alumno alumno3 = new Alumno(6.8);
+
+                    //Agregar objetos a la clase "GuardarObjetos"
+                    objeto1.AgregarElementos(alumno1);
+                    objeto1.AgregarElementos(alumno2);
+                    objeto1.AgregarElementos(alumno3); 
+
+                    //Obtener elementos manualmente:
+                    valorElemento = (Alumno)objeto1.ObtenerElementos(0); // el Alumno con su calificacion que buscamos en la posicion
+                    Console.WriteLine(valorElemento.Calificacion);
+
+                    Console.WriteLine("Aunque funciona la careacion de objetos con 1 solo objeto, en este caso Alumnos, el problema radica cuando son demaciados objetos");
+                break;
+
+
+
+                case 25:
                     Console.WriteLine();
-                    break;
+                    Console.WriteLine("#################");
+                    Console.WriteLine("El uso de los Genericos - Ejemplo de Alumnos");
+                    Console.WriteLine("se han agragado las calificaciones de manera manual en el sistema: ");
+
+                    //variables locales
+                    Alumno valorElementoEjemploGenerico;
+
+                    //Instanciando la clase
+                    GuardaObjetosConGenerico<Alumno> objeto = new GuardaObjetosConGenerico<Alumno>(3); // con 3 elementos
+
+                    //Intanciamos a la clase "Alumno"
+                    Alumno alumno4 = new Alumno(8.5);
+                    Alumno alumno5 = new Alumno(10);
+                    Alumno alumno6 = new Alumno(6.8);
+
+                    //Agregar objetos a la clase "GuardarObjetos"
+                    objeto.AgregarElementos(alumno4);
+                    objeto.AgregarElementos(alumno5);
+                    objeto.AgregarElementos(alumno6);
+
+                    //Obtener elementos manualmente:
+                    valorElementoEjemploGenerico = (Alumno)objeto.ObtenerElementos(0); // el Alumno con su calificacion que buscamos en la posicion
+                    Console.WriteLine(valorElementoEjemploGenerico.Calificacion);
+
+                    Console.WriteLine();
+                break;
+
+
+
+
+                case 26:
+                    Console.WriteLine();
+                    Console.WriteLine("#################");
+                    Console.WriteLine("");
+
+                    List<string> Personas = new List<string>(); 
+
+                    Console.WriteLine();
+                break;
 
 
                 default:
@@ -984,11 +1089,19 @@ namespace repaso_de.net
                 break;
             }
             Console.ReadKey();
-        }
+
+        }// Fin del metodo MAIN ⬆️
 
 
-        
-        
+
+
+
+
+
+
+
+
+        //metodos estaticos ⬇️
         //  Modificador - tipo - identificador - parametros
         static void Sumar()
         {
@@ -1104,6 +1217,18 @@ namespace repaso_de.net
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+    //Clases ⬇️
 
     public class Motocicleta
     {
@@ -1388,6 +1513,87 @@ namespace repaso_de.net
             mensaje = "\nTitular: " + nombre + " " + apellido + "\nRFC: " + rfc + "\nDirección: " + direccion + "\nSaldo: " + saldo;
 
             return mensaje;
+        }
+    }
+
+
+
+   
+
+    //Clase No usa generico
+    class GuardaObjetosSinGenerico
+    {
+        //Campos
+        private int i = 0;
+        private object[] matrizElementos;
+
+        //Constructor
+        public GuardaObjetosSinGenerico(int elementoParamatro)
+        {
+            matrizElementos = new object[elementoParamatro];
+        }
+
+        public void AgregarElementos(object elementoParamatro)
+        {
+            matrizElementos[i] = elementoParamatro;
+            i++;
+        }
+
+        public object ObtenerElementos(int elementoParamatro)
+        {
+            return matrizElementos[elementoParamatro];
+        }
+    }
+
+
+
+
+
+    class Alumno
+    {
+        //campos
+        double calificacion;
+
+        //constructor
+        public Alumno(double calificacionParametro)
+        {
+            calificacion = calificacionParametro;
+        }
+
+        //propiedades
+        public double Calificacion
+        {
+            get => calificacion;
+        }
+    }
+
+
+
+
+
+
+    // Clase CON genericos
+    class GuardaObjetosConGenerico<T>
+    {
+        //Campos
+        private int i = 0;
+        private T[] matrizElementos;
+
+        //Constructor
+        public GuardaObjetosConGenerico(int elementoParamatro)
+        {
+            matrizElementos = new T[elementoParamatro];
+        }
+
+        public void AgregarElementos(T elementoParamatro)
+        {
+            matrizElementos[i] = elementoParamatro;
+            i++;
+        }
+
+        public T ObtenerElementos(int elementoParamatro)
+        {
+            return matrizElementos[elementoParamatro];
         }
     }
 }
