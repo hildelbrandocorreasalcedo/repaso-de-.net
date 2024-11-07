@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Data.Odbc;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
 namespace repaso_de.net
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
@@ -29,6 +30,10 @@ namespace repaso_de.net
             Console.WriteLine("14. Array - Matriz unidimencional");
             Console.WriteLine("15. Matriz mutidimencional de 2");
             Console.WriteLine("16. Pasar matrices como argumentos en metodos");
+            Console.WriteLine("17. Clases y objetos, propiedades Publicas - ejemplo de la clase Motocipleta");
+            Console.WriteLine("18. Clases y objetos, propiedades Privadas - ejemplo de la clase Automovil");
+            Console.WriteLine("19. Metodo sobrecargado - Ejemplo");
+            Console.WriteLine("20. Clase Random - Ejemplo");
 
             Console.WriteLine();
 
@@ -751,7 +756,32 @@ namespace repaso_de.net
                 case 17:
                     Console.WriteLine();
                     Console.WriteLine("#################");
-                    Console.WriteLine("");
+                    Console.WriteLine("Clases y objetos, propiedades publicas - ejemplo de la clase Motocicleta");
+
+                    // variable local
+                    bool acelerar;
+
+                    // [referencia del objeto] [Variable local] = new [creando el objeto de tipo Motocicleta()]           
+                    // Instanciado a la clase Motocicleta
+                    Motocicleta motocicleta1 = new Motocicleta();
+
+                    motocicleta1.Acelerar();
+
+                    // accedemos a los campos de la clase
+                    motocicleta1.color = "negra";
+                    motocicleta1.combustible = "Gasolina";
+
+                    Console.WriteLine("El combustible de la motocipleta es: " + motocicleta1.combustible);
+
+                    acelerar = motocicleta1.Acelerar();
+
+                    if (acelerar)
+                    {
+                        Console.WriteLine("Acelerarando correctamente");
+                    }
+
+                    Motocicleta.Prueba();
+
                     Console.WriteLine();
                     break;
 
@@ -760,7 +790,22 @@ namespace repaso_de.net
                 case 18:
                     Console.WriteLine();
                     Console.WriteLine("#################");
-                    Console.WriteLine("");
+                    Console.WriteLine("Clases y objetos, propiedades privadas - ejemplo de la clase Automovil");
+
+                    // [referencia del objeto] [Variable local] = new [creando el objeto de tipo Automovil()]           
+                    // Instanciado a la clase Automovil
+                    Automovil automovil1 = new Automovil();
+
+                    automovil1.Acelerar();
+                    // Mostramos el campo privado
+                    Console.WriteLine("El combustible de la automovil es: " + automovil1.Color);
+
+                    //Asignandole un valor a un campo privado y mostrandolo
+                    automovil1.Combustible = "Disel";
+                    Console.WriteLine("El combustible es: {0}", automovil1.Combustible);
+
+                    Console.WriteLine("Utilizando un metodo ToString() este es el valor: " + automovil1.ToString());
+
                     Console.WriteLine();
                     break;
 
@@ -770,7 +815,71 @@ namespace repaso_de.net
                 case 19:
                     Console.WriteLine();
                     Console.WriteLine("#################");
+                    Console.WriteLine("Metodo sobrecargado - Ejemplo");
+
+                    string nombreYApellido;
+                    Nombres nombresVariableLocal = new Nombres();
+
+                    nombreYApellido = nombresVariableLocal.Concatenar("Hilde", "Correa", "salcedo");
+                    Console.WriteLine(nombreYApellido);
+                break;
+
+
+
+
+                case 20:
+                    Console.WriteLine();
+                    Console.WriteLine("#################");
+                    Console.WriteLine("Clase Random - Ejemplo");
+
+                    Random random = new Random();
+
+                    Console.WriteLine("Te ofrece un numero Random no negativo: " + random.Next());
+                    Console.WriteLine("Te ofrece un numero Random en menor que 10 como le pasastes por argumento: " + random.Next(10));
+                    Console.WriteLine("Te ofrece un numero Random en el rango de 10 a 20 como le pasastes 2 argumento: " + random.Next(10, 20));
+
+                    Console.WriteLine();
+                break;
+
+
+
+
+                case 21:
+                    Console.WriteLine();
+                    Console.WriteLine("#################");
                     Console.WriteLine("");
+
+
+                    Console.WriteLine();
+                    break;
+
+
+
+
+                case 22:
+                    Console.WriteLine();
+                    Console.WriteLine("#################");
+                    Console.WriteLine("       ");
+                    Console.WriteLine();
+                    break;
+
+
+
+
+                case 23:
+                    Console.WriteLine();
+                    Console.WriteLine("#################");
+                    Console.WriteLine("       ");
+                    Console.WriteLine();
+                    break;
+
+
+
+
+                case 24:
+                    Console.WriteLine();
+                    Console.WriteLine("#################");
+                    Console.WriteLine("       ");
                     Console.WriteLine();
                     break;
 
@@ -897,6 +1006,149 @@ namespace repaso_de.net
                     Console.WriteLine(matriz2dParametros[i, j]);
                 }
             }
+        }
+    }
+
+
+    public class Motocicleta
+    {
+        //Campos publicos
+        public string color, modelo, combustible;
+        public byte año, numPuertas;
+        public int ccMotor;
+
+        //Metodos
+        public bool Acelerar()
+        {
+            bool acelerar = true;
+            Console.WriteLine("Acelerar");
+            Prueba();
+            return acelerar;
+        }
+
+        // metodo estatico
+        public static void Prueba()
+        {
+            Console.WriteLine("Este es un metodo estatico");
+        }
+
+        public bool Frenar()
+        {
+            bool acelerar = true;
+            Console.WriteLine("Frenar");
+            return acelerar;
+        }
+
+        public void Velocidades(ref byte velocidadPa)
+        {
+            velocidadPa++;
+            Console.WriteLine("Cambio de Velocidades");
+        }
+    }
+
+
+
+
+    public class Automovil
+    {
+        //Campos publicos
+        private string color = "rojo", modelo = "HFH-456", combustible, año = "2000", numPuertas = "4";
+        private int ccMotor = 1500;
+
+        // ejemplo para campos inicializadas con el constructor
+        private string asientos, colorTablero;
+        private bool camaraTrasera;
+
+
+        //Constructor
+        public Automovil(){
+            asientos = "piel";
+            colorTablero = "Cafe";
+            camaraTrasera = false;
+        }
+
+
+
+        // propiedades
+        //[acceso] [Tipo] [Nomre]
+        public string Color
+        {
+            //descriptor de acceso "get" es obtener
+            get { return color; }
+        }
+
+        public string Combustible
+        {
+            //descripto de acceso "get" es obtener
+            get => combustible;   //get { return combustible; }   es lo mismo
+
+            //descriptor de acceso "set" es colocar
+            set => combustible = value;   //set { combustible = value; }   es lo mismo
+        }
+
+
+
+        //Metodos
+        public bool Acelerar()
+        {
+            bool acelerar = true;
+            Console.WriteLine("Acelerar");
+            return acelerar;
+        }
+
+
+        public bool Frenar()
+        {
+            bool acelerar = true;
+            Console.WriteLine("Frenar");
+            return acelerar;
+        }
+
+        public void Velocidades(ref byte velocidadPa)
+        {
+            velocidadPa++;
+            Console.WriteLine("Cambio de Velocidades");
+        }
+
+
+
+        // Invalidado el metodo ToString
+        public override string ToString()
+        {
+            //string mensaje;
+            //mensaje = "el color es: " + color;
+            //return mensaje;
+
+            //return "el color es: " + color;
+
+            string mensaje;
+
+            mensaje = "\n\nValores de un automovil: " + "\nModelo: " + modelo + "\nColor: " + color + "\naño: " + año + "\nPuertas: " + numPuertas + "\nTipo de combustible: " + combustible + "\nMotor: " + ccMotor + "\nasientos: " + asientos + "\ncolor del Tablero: " + colorTablero + "\ncamaraTrasera: " + camaraTrasera;
+            return mensaje;
+        }
+    }
+
+
+
+    class Nombres
+    {
+        //metodo sobrecargar
+        public string Concatenar(string nombresParametro, string apellidoParametro)
+        {
+            string nombreApellido;
+
+            nombreApellido = "Nombre: " + nombresParametro + " - Apellido: " + apellidoParametro;
+
+            return nombreApellido;
+        }
+
+        public string Concatenar(string nombresParametro, string apellidoParametro, string apellido2Parametro)
+        {
+            string nombreApellido;
+
+            nombreApellido = "Nombre: " + nombresParametro + " - Apellido 1: " + apellidoParametro + " - Apellido 2: " + apellido2Parametro;
+
+            return nombreApellido;
         }
     }
 }
